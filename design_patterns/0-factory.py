@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+class Bus:
+    def mode(self) -> str:
+        return "road"
+
+
+class Train:
+    def mode(self) -> str:
+        return "rails"
+
+
+class Bike:
+    def mode(self) -> str:
+        return "lane"
+
+
+class Scooter:
+    def mode(self) -> str:
+        return "scooter_lane"
+
+
+class VehicleFactory:
+    def __init__(self):
+        # Existing built-in registry types
+        self._registry = {
+            "bus": Bus,
+            "train": Train,
+            "bike": Bike
+        }
+
+    def register_kind(self, name: str, cls):
+        self._registry[name] = cls
+
+    def create(self, kind: str):
+        if kind not in self._registry:
+            raise ValueError(f"Unknown vehicle type: {kind}")
+        return self._registry[kind]()
+
+
+def main():
+    factory = VehicleFactory()
+    
+    # Existing print outputs
+    print(factory.create("bus").mode())
+    print(factory.create("train").mode())
+    print(factory.create("bike").mode())
+    
+    # 1. Register the new 'scooter' type dynamically without modifying VehicleFactory
+    factory.register_kind("scooter", Scooter)
+    
+    # 2. Instantiate and print the mode for the newly registered type
+    print(factory.create("scooter").mode())
+
+
+if __name__ == "__main__":
+    main()
