@@ -44,7 +44,7 @@ def main():
     print(factory.create("bike").mode())
 
     factory.register_kind("scooter", Scooter)
-    
+
     print(factory.create("scooter").mode())
 
 
