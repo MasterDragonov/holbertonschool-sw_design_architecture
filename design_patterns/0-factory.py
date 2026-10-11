@@ -21,7 +21,6 @@ class Scooter:
 
 class VehicleFactory:
     def __init__(self):
-        # Existing built-in registry types
         self._registry = {
             "bus": Bus,
             "train": Train,
@@ -39,16 +38,13 @@ class VehicleFactory:
 
 def main():
     factory = VehicleFactory()
-    
-    # Existing print outputs
+
     print(factory.create("bus").mode())
     print(factory.create("train").mode())
     print(factory.create("bike").mode())
-    
-    # 1. Register the new 'scooter' type dynamically without modifying VehicleFactory
+
     factory.register_kind("scooter", Scooter)
     
-    # 2. Instantiate and print the mode for the newly registered type
     print(factory.create("scooter").mode())
 
 
